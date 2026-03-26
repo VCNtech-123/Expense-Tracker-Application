@@ -187,7 +187,7 @@ header {
 
 /* Add Expense Section */
 .form_header {
-    max-width: 60%;
+    min-width: 60%;
     margin: 0 auto;
 }
 
@@ -317,6 +317,8 @@ header {
 
 .expense_number {
     align-self: flex-start;
+    margin: 2rem 0rem 1rem 0rem;
+    color:var(--color-text-secondary);
 }
 
 .expense_card {
@@ -388,7 +390,7 @@ header {
     gap: 2rem;
 }
 
-#expense_amount {
+#exp_amount {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -449,4 +451,41 @@ header {
     min-height: 1px;
     min-width: 100%;
     background-color:var(--color-border-tertiary);
+}
+
+.floating_add {
+  position: fixed;
+  right: 220px;
+  bottom: 32px;
+  width: 4rem;
+  height: 4rem;
+  border: none;
+  border-radius: 50%;
+  background: #2563EB;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+}
+
+.floating_add:hover {
+  background: #1D4ED8;
+  transform: scale(1.05);
+}
+
+.floating_add:active {
+  transform: scale(0.97);
+}
+
+.warning {
+    margin: 0;
+    color:var(--color-expense-border);
+}
+
+.show {
+    display: flex;
 }
