@@ -1,0 +1,184 @@
+:root {
+    /* Background Colors */
+    --color-bg-primary: #000000;
+    --color-bg-secondary: #09090b;
+    --color-bg-tertiary: #18181b;
+    --color-bg-card: #27272a;
+
+    /* Border Colors */
+    --color-border-primary: #27272a;
+    --color-border-secondary: #3f3f46;
+    --color-border-tertiary: #52525b;
+
+    /* Text Colors */
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #d4d4d8;
+    --color-text-tertiary: #a1a1aa;
+    --color-text-muted: #71717a;
+    --color-text-subtle: #52525b;
+
+    /* Accent Colors */
+    --color-accent-blue: #2563eb;
+    --color-accent-blue-hover: #1d4ed8;
+    --color-accent-blue-light: #3b82f6;
+
+    /* Expense/Alert Colors */
+    --color-expense-primary: #f87171;
+    --color-expense-bg: #450a0a81;
+    --color-expense-bg-light: #7f1d1d;
+    --color-expense-border: #991b1b;
+
+    /* Success Colors */
+    --color-success: #16a34a;
+    --color-success-hover: #15803d;
+
+    /* Category Colors */
+    --color-category-food: #f97316;
+    --color-category-transport: #3b82f6;
+    --color-category-entertainment: #a855f7;
+    --color-category-shopping: #ec4899;
+    --color-category-bills: #eab308;
+    --color-category-health: #ef4444;
+    --color-category-education: #22c55e;
+    --color-category-other: #71717a;
+  }
+
+/* Home Section */
+/* Header */
+body {
+    background-color:var(--color-bg-primary);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    color:var(--color-text-primary);
+    font-size: 16px;
+}
+
+header {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-bottom:var(--color-border-primary) solid 1px;
+}
+
+.top_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_text {
+    flex: 4;
+}
+
+.main_header {
+    margin: 0;
+}
+
+.author {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color:var(--color-text-secondary);
+}
+
+.subtitle {
+    color:var(--color-text-muted);
+    margin: 0;
+}
+
+.total_expenses {
+    flex: 1;
+
+    display: flex;
+    gap: 2rem;
+    padding: 0.5rem 2rem;
+    
+
+    background-color:var(--color-expense-bg);
+    border-radius: 20px;
+    border:var(--color-expense-border) solid 1px;
+}
+
+.total {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.2rem;
+} 
+
+.total p {
+    margin: 0;
+    font-size: 0.8rem;
+    color:var(--color-text-secondary);
+}
+
+.total_money {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.stat_line {
+    width: 20%;
+    filter: invert(58%) sepia(42%) saturate(2371%) hue-rotate(315deg) brightness(101%) contrast(94%);
+}
+
+
+/* Inital Screen */
+.empty_list {
+    min-height: calc(100vh - 155px);
+    max-width: 1120px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.line {
+    width: 5%;
+    padding: 1.5rem;
+
+    display: flex;
+    justify-content: center;
+
+    border-radius: 50%;
+    border:var(--color-border-secondary) solid 1px;
+    background-color:var(--color-bg-tertiary);
+}
+
+.line_chart {
+    width: 100%;
+    filter: invert(25%) sepia(5%) saturate(545%) hue-rotate(202deg) brightness(93%) contrast(83%);
+}
+
+.no_expenses {
+    margin: 1rem 0rem 0rem 0rem;
+    font-size: 1.5rem;
+    color:var(--color-text-secondary);
+}
+
+.add {
+    width: 13rem;
+    height: 3rem;
+
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    border:var(--color-border-primary) solid 1px;
+    background-color:var(--color-accent-blue);
+    color:var(--color-text-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add:hover {
+    background-color:var(--color-accent-blue-hover);
+}
+
+/* Add Expense Section */
