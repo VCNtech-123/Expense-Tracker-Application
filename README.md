@@ -29,7 +29,7 @@ In the end, this project helped me get more comfortable with application flow in
 
 ## Live Demo
 
-[View Live]((https://vcntech-123.github.io/Expense-Tracker-Application/))
+[View Live](https://vcntech-123.github.io/Expense-Tracker-Application/)
 
 ## Author
 
