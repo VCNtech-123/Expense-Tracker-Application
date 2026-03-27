@@ -5,16 +5,23 @@ import { ExpenseTracker } from './utils/ExpenseTracker.js'
 
 const mainScreen = document.querySelector('body');
 const savedData = localStorage.getItem('SavedExpenses');
+const savedId = localStorage.getItem('SavedId');
 let allExpenses = [];
-
+let id = 0;
 
 if (savedData) {
     allExpenses = JSON.parse(savedData).map(data => {
-        return new Expense(data.name, data.amount, data.category, data.date);
+        return new Expense(data.name, data.amount, data.category, data.date, data.id);
     });
+    id = JSON.parse(savedId);
     const manager = new ExpenseTracker(allExpenses);
-    mainScreen.innerHTML = render.expenseScreen(manager);
-    render.renderCard(allExpenses); 
+        if (allExpenses.length > 0) {
+            mainScreen.innerHTML = render.expenseScreen(manager);
+            render.renderCard(allExpenses); 
+        }
+        else {
+            mainScreen.innerHTML = render.defaultScreen();
+        }
 } else {
     mainScreen.innerHTML = render.defaultScreen();
 }
@@ -30,18 +37,20 @@ mainScreen.addEventListener('click', (e) => {
     }
 });
 
-let recentScreen = render.defaultScreen();
-
 mainScreen.addEventListener('click', (e) => {
     const userInput = document.querySelectorAll('.user_input');
     const backButton = e.target.closest('.back');
     if (backButton) {
-        mainScreen.innerHTML = recentScreen;
+        const manager = new ExpenseTracker(allExpenses);
+        mainScreen.innerHTML = render.expenseScreen(manager);
+        render.renderCard(allExpenses);
     }
 
     const cancelButton = e.target.closest('#cancel_btn');
     if (cancelButton) {
-        mainScreen.innerHTML = recentScreen;
+        const manager = new ExpenseTracker(allExpenses);
+        mainScreen.innerHTML = render.expenseScreen(manager);
+        render.renderCard(allExpenses);
     }
 
     const addButton = e.target.closest('#add_btn');
@@ -55,14 +64,16 @@ mainScreen.addEventListener('click', (e) => {
         }); 
 
         if (eligible) {
-            const newExpense = new Expense(userInput[0].value, Number(userInput[1].value), userInput[2].value, userInput[3].value);
+            const newExpense = new Expense(userInput[0].value, Number(userInput[1].value), userInput[2].value, userInput[3].value, id);
             allExpenses.push(newExpense);
             const manager = new ExpenseTracker(allExpenses);
+            id++;
             mainScreen.innerHTML = render.expenseScreen(manager);
             render.renderCard(allExpenses);  
-            saveData()
+            saveData();
             recentScreen = mainScreen.innerHTML;
         }
+
         else {
             const form = document.querySelector('.add_expense');
             let warning = form.querySelector('.warning');
@@ -77,6 +88,8 @@ mainScreen.addEventListener('click', (e) => {
     }
 });
 
+let dotMenu = '';
+
 mainScreen.addEventListener('click', e => {
     const floatingAdd = e.target.closest('.floating_add');
 
@@ -88,7 +101,7 @@ mainScreen.addEventListener('click', e => {
 
     if (dotButton) {
         e.stopPropagation();
-        const dotMenu = dotButton.querySelector('.more_content');
+        dotMenu = dotButton.querySelector('.more_content');
 
         document.querySelectorAll('.more_content').forEach(m => {
             if (m !== dotMenu) m.classList.remove('show');
@@ -98,8 +111,51 @@ mainScreen.addEventListener('click', e => {
     }
 });
 
+mainScreen.addEventListener('click', e => {
+    
+    const editButton = e.target.closest('.edit_btn');
+
+    if (editButton) {
+        e.preventDefault();
+        const mainCard = editButton.closest('.expense_card');
+        const editIndex = allExpenses.findIndex( expense => +mainCard.dataset.id === +expense.id);
+        mainScreen.innerHTML = render.updateScreen(allExpenses[editIndex]); 
+        allExpenses[editIndex] = { ...allExpenses[editIndex], 
+            name: userInput[0], 
+            amount: userInput[1], 
+            category: userInput[2], 
+            date: userInput[3] 
+        };
+
+        
+    }
+
+    const deleteButton = e.target.closest('.del_btn');
+
+    if (deleteButton) {
+        e.preventDefault();
+        const mainCard = deleteButton.closest('.expense_card');
+        const removeIndex = allExpenses.findIndex( expense => +mainCard.dataset.id === +expense.id);
+        mainCard.remove();
+        allExpenses.splice(removeIndex, 1);
+
+        if (allExpenses.length > 0) {
+            mainScreen.innerHTML = render.expenseScreen(manager);
+            render.renderCard(allExpenses);
+        }
+        else {
+            mainScreen.innerHTML = render.defaultScreen();
+        }
+
+        saveData();
+    }   
+});
+
+
 
 const saveData = () => {
     localStorage.setItem('SavedExpenses', JSON.stringify(allExpenses));
-}
+    localStorage.setItem('SavedId', JSON.stringify(id));
+}   
+
 
