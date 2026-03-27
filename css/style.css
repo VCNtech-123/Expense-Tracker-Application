@@ -307,6 +307,7 @@ header {
     min-height: calc(100vh - 249px);
     max-width: 1120px;
     margin: 0 auto;
+    padding-bottom: 2rem;
 
     display: flex;
     flex-direction: column;
@@ -333,11 +334,12 @@ header {
 }
 
 .card_svg {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     background-color:var(--color-expense-bg);
-    border:var(--color-expense-border) solid 1px;
+    border:var(--color-border-primary) solid 1px;
     border-radius: 10px;
+    padding: 1rem;
 
     display: flex;
     align-items: center;
@@ -345,8 +347,8 @@ header {
 }
 
 .category_svg {
-    max-width: 3rem;
-    max-height: 3rem;
+    max-width: 2.5rem;
+    max-height: 2.5rem;
     object-fit: cover;
 }
 
@@ -385,6 +387,34 @@ header {
     background-color:var(--color-category-food);
 }
 
+#category_transport {
+    background-color:var(--color-category-transport);
+}
+
+#category_entertainment {
+    background-color:var(--color-category-entertainment);
+}
+
+#category_shopping {
+    background-color:var(--color-category-shopping);
+}
+
+#category_bills {
+    background-color:var(--color-category-bills);
+}
+
+#category_health {
+    background-color:var(--color-category-health);
+}
+
+#category_education {
+    background-color:var(--color-category-education);
+}
+
+#category_other {
+    background-color:var(--color-category-other);
+}
+
 .expense_funtionality {
     display: flex;
     gap: 2rem;
@@ -396,8 +426,8 @@ header {
     justify-content: center;
 
     font-weight: 600;
-    font-size: 2.5rem;
-    color:var(--color-expense-primary);
+    font-size: 2.8rem;
+    color:var(--color-text-primary);
 }
 
 .more_button {
@@ -414,7 +444,7 @@ header {
 .dot {
     min-width: 5px;
     min-height: 5px;
-    background-color:var(--color-text-tertiary);
+    background-color:var(--color-text-secondary);
     border-radius: 100%;
 }
 

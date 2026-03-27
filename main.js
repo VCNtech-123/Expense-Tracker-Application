@@ -71,7 +71,6 @@ mainScreen.addEventListener('click', (e) => {
             mainScreen.innerHTML = render.expenseScreen(manager);
             render.renderCard(allExpenses);  
             saveData();
-            recentScreen = mainScreen.innerHTML;
         }
 
         else {
@@ -120,14 +119,7 @@ mainScreen.addEventListener('click', e => {
         const mainCard = editButton.closest('.expense_card');
         const editIndex = allExpenses.findIndex( expense => +mainCard.dataset.id === +expense.id);
         mainScreen.innerHTML = render.updateScreen(allExpenses[editIndex]); 
-        allExpenses[editIndex] = { ...allExpenses[editIndex], 
-            name: userInput[0], 
-            amount: userInput[1], 
-            category: userInput[2], 
-            date: userInput[3] 
-        };
 
-        
     }
 
     const deleteButton = e.target.closest('.del_btn');
@@ -140,6 +132,7 @@ mainScreen.addEventListener('click', e => {
         allExpenses.splice(removeIndex, 1);
 
         if (allExpenses.length > 0) {
+            const manager = new ExpenseTracker(allExpenses);
             mainScreen.innerHTML = render.expenseScreen(manager);
             render.renderCard(allExpenses);
         }
@@ -151,11 +144,55 @@ mainScreen.addEventListener('click', e => {
     }   
 });
 
+mainScreen.addEventListener('click', (e) => {
+    const userInput = document.querySelectorAll('.user_input');
+
+    const updateButton = e.target.closest('.update_btn');
+    if (updateButton) {
+        let eligible = true;
+
+        userInput.forEach(input => {
+            if (input.value.trim() == '') {
+                eligible = false;
+            }
+        }); 
+
+        if (eligible) {
+            const expenseForm = document.querySelector('.add_expense');
+            const updateIndex = allExpenses.findIndex( expense => +expenseForm.dataset.id === +expense.id);
+            allExpenses[updateIndex] = { ...allExpenses[updateIndex], 
+                name: userInput[0].value, 
+                amount: Number(userInput[1].value), 
+                category: userInput[2].value, 
+                date: userInput[3].value
+        };
+            
+            const manager = new ExpenseTracker(allExpenses);
+            mainScreen.innerHTML = render.expenseScreen(manager);
+            render.renderCard(allExpenses);  
+            saveData();
+        }
+
+        else {
+            const form = document.querySelector('.add_expense');
+            let warning = form.querySelector('.warning');
+
+            if (!warning) {
+                warning = document.createElement('p');
+                warning.classList.add('warning');
+                warning.textContent = 'All Inputs Required! Please Try Again!';
+                form.prepend(warning);
+            }
+        }
+    }
+});
+
 
 
 const saveData = () => {
     localStorage.setItem('SavedExpenses', JSON.stringify(allExpenses));
     localStorage.setItem('SavedId', JSON.stringify(id));
-}   
+}  
+
 
 
